@@ -16,6 +16,11 @@ const LEFT_KEY_A = 65;
 const RIGHT_KEY_D = 68;
 const UP_KEY_W = 87;
 const DOWN_KEY_S = 83;
+
+let score = 0;
+
+let food_x;
+let food_y;
     
 let snake = [
     {x: 200, y: 200},
@@ -44,6 +49,7 @@ function main() {
 
 function onTick() {
     clearCanvas();
+    drawFood();
     moveSnake();
     drawSnake();
     main();
@@ -52,7 +58,16 @@ function onTick() {
 function moveSnake() {
     const head = {x: snake[0].x + dx, y: snake[0].y + dy};
     snake.unshift(head);
-    snake.pop();
+    if (snake[0].x === food_x && snake[0].y === food_y) {
+        // Increase score
+        score += 10;
+        // Display score on screen
+        document.getElementById('score').innerHTML = score;
+        // Generate new food location
+        gen_food();
+    }else {
+        snake.pop();
+    }
 }
 
 
@@ -67,6 +82,13 @@ function clearCanvas() {
     snakeboard_ctx.fillRect(0, 0, snakeboard.width, snakeboard.height);
     // Draw a "border" around the entire canvas
     snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.height);
+}
+
+function drawFood() {
+    snakeboard_ctx.fillStyle = 'lightgreen';
+    snakeboard_ctx.strokestyle = 'darkgreen';
+    snakeboard_ctx.fillRect(food_x, food_y, 10, 10);
+    snakeboard_ctx.strokeRect(food_x, food_y, 10, 10);
 }
 
 // Draw the snake on the canvas
@@ -123,7 +145,27 @@ function change_direction(event) {
     }
 }
 
+function random_food(min, max) {
+    return Math.round((Math.random() * (max-min) + min) / 10) * 10;
+}
+
+function gen_food() {
+    // Generate a random number the food x-coordinate
+    food_x = random_food(0, snakeboard.width - 10);
+    // Generate a random number for the food y-coordinate
+    food_y = random_food(0, snakeboard.height - 10);
+    // if the new food location is where the snake currently is, generate a new food location
+    snake.forEach(has_snake_eaten_food);
+}
+
+function has_snake_eaten_food(part) {
+    const has_eaten = part.x == food_x && part.y == food_y;
+    if (has_eaten) gen_food();
+}
+
+
     
 main();
+gen_food();
 
 document.addEventListener("keydown", change_direction);
