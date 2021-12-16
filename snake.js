@@ -1,6 +1,6 @@
 const board_border = 'black';
 const board_background = "white";
-const snake_col = 'ligthgreen';
+const snake_col = 'green';
 const snake_border = 'darkblue';
 
 // keys codes
