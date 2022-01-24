@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Poppins&display=swap');
+
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+.container{
+    text-align: center;
+}
+
+.container p{
+  margin-top: 1em;
+}
+
+.menu{
+  display: grid;
+  text-align: left;
+  grid-template-columns: 70% 30%;
+}
+
+.menu__list li{
+  list-style: none;
+  margin-top: 5em;
+  margin-left: 2em;
+}
+
+.menu__list li a{
+  text-decoration: none;
+}
+
+.snake{
+  padding-right: 0;
+  margin-right: 0;
+  text-align: right;
+}
+#score{
+  margin-top: 2em;
+  font-size: x-large;
+}
+
+#snakeboard{
+  margin: 4em 1em 2em 2em;
+}
+

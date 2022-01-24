@@ -6,22 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styless.css">
 </head>
 <body>
+  <div class="container">
+    <p>Snake Game</p>
     <div id="score">0</div>
-    <canvas id="snakeboard" width="400" height="400"><canvas></canvas>
-    <style>
-        #snakeboard {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-        #score {
-        text-align: center;
-        font-size: 140px;
-      }
-      </style>
+    <div class="menu">
+
+      <div class="snake">
+        <canvas id="snakeboard" width="400" height="400"></canvas>
+      </div>
+      <div class="menu__list">
+        <li>
+          <button id="button__play">Play Game</button>
+        </li>
+        <li>
+          <button class="button button__reset">Button</button>
+        </li>
+        <li>
+          <button class="button">Button</button>
+        </li>
+        <li>
+          <button class="button">Button</button>
+        </li>
+      </div>
+
+    </div>
+  </div>
 </body>
 <script src="snake.js"></script>
 </html>

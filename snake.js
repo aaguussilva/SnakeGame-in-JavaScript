@@ -3,7 +3,8 @@ const board_background = "white";
 const snake_col = 'green';
 const snake_border = 'darkblue';
 
-// keys codes
+// keys codes: This keys move the snake in any direction
+
 
 // arrows
 const LEFT_KEY_ARROW = 37;
@@ -17,11 +18,14 @@ const RIGHT_KEY_D = 68;
 const UP_KEY_W = 87;
 const DOWN_KEY_S = 83;
 
+// score of the game, starting in 0
 let score = 0;
 
+//variable x,y used in generation of food
 let food_x;
 let food_y;
     
+// this is the snake, for now it can only grow
 let snake = [
     {x: 200, y: 200},
     {x: 190, y: 200},
@@ -30,9 +34,11 @@ let snake = [
     {x: 160, y: 200}
 ]
 
+//var use in change direction of the snake
 let dx = 10;
 let dy = 0;
 
+let change_direction = true;
 
 // Get the canvas element
 const snakeboard = document.getElementById("snakeboard");
@@ -44,20 +50,43 @@ console.log(snakeboard_ctx)
 // main function called repeatedly to keep the game running
 function main() {
     if(hasCollision()) return;
-    setTimeout(onTick,100)
+    change_direction = false;
+    setTimeout(onTick,50) // this call funtion onTick each 1000 miliseconds
 }
 
 function onTick() {
-    clearCanvas();
-    drawFood();
-    moveSnake();
-    drawSnake();
-    main();
+        clearCanvas();
+        drawFood();
+        moveSnake();
+        drawSnake();
+        main(); 
 }
 
 function moveSnake() {
-    const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-    snake.unshift(head);
+    const hitLeftWall = snake[0].x < 0;
+    const hitRightWall = snake[0].x > snakeboard.width - 10;
+    const hitToptWall = snake[0].y < 0;
+    const hitBottomWall = snake[0].y > snakeboard.height - 10;
+
+    if (hitLeftWall) {
+        const head = {x: snake[0].x + 400, y: snake[0].y + dy};
+        snake.unshift(head);
+    }else if(hitRightWall){
+        const head = {x: snake[0].x - 400, y: snake[0].y + dy};
+        snake.unshift(head);
+    }else if(hitToptWall){
+        const head = {x: snake[0].x + dx, y: snake[0].y + 400};
+        snake.unshift(head);
+    }else if(hitBottomWall){
+        const head = {x: snake[0].x - dx, y: snake[0].y - 400};
+        snake.unshift(head);
+    }else{
+        const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+        snake.unshift(head);
+    }
+
+
+
     if (snake[0].x === food_x && snake[0].y === food_y) {
         // Increase score
         score += 10;
@@ -117,14 +146,11 @@ function hasCollision(){
             return true;
         }  
     }
-    const hitLeftWall = snake[0].x < 0;
-    const hitRightWall = snake[0].x > snakeboard.width - 10;
-    const hitToptWall = snake[0].y < 0;
-    const hitBottomWall = snake[0].y > snakeboard.height - 10;
-    return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
 }
 
-function change_direction(event) {
+function changeDirection(event) {
+    if(change_direction) return;
+    change_direction = true;
     const keyName = event.keyCode;
 
     if ((keyName == UP_KEY_ARROW || keyName == UP_KEY_W) && dy != 10) {
@@ -164,8 +190,8 @@ function has_snake_eaten_food(part) {
 }
 
 
-    
-main();
 gen_food();
+main();
+// Enlazar boton
 
-document.addEventListener("keydown", change_direction);
+document.addEventListener("keydown", changeDirection);
