@@ -1,19 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Poppins&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
 
 *{
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: 'Poppins';
+  font-family: 'Amatic SC', cursive;
+  background-color: #286324;
 }
 
 .container{
     text-align: center;
+
 }
 
 .container p{
   margin-top: 1em;
+  font-size: 2em;
 }
 
 .menu{
@@ -21,13 +23,17 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
-#score{
-  margin-top: 2em;
-  font-size: x-large;
+.score__container{
+  text-align: center;
+  margin-right: 20em;
+}
+#score__text{
+  margin-left: 5em;
 }
 
 .button{
   margin-left: 2em;
+  background-color: #ffcc00;
 }
 
 .menu__list li{
@@ -35,6 +41,10 @@
   justify-content: left;
   list-style: none;
   margin-top: 2em;
+}
+
+#snakeboard{
+  border: 5px dotted #950e0e;
 }
 
 

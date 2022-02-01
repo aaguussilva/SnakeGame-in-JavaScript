@@ -11,16 +11,16 @@
 <body>
   <div class="container">
     <p>Snake Game</p>
-    <div id="score">0</div>
     <div class="menu">
       <div></div>
       <div class="snake__canvas">
+        <div class="score__container">Score:<span id="score">0</span></div>
         <canvas id="snakeboard" width="400" height="400"></canvas>
       </div>
 
       <div class="menu__list">
         <li>
-          <button class="button">Play Game</button>
+          <button class="button" id="play">Play Game</button>
         </li>
         <li>
           <button class="button">Button</button>

@@ -1,6 +1,6 @@
-const board_border = 'black';
-const board_background = "white";
-const snake_col = 'green';
+const board_border = '#950e0e';
+const board_background = "#50915b";
+const snake_col = '#0e1195';
 const snake_border = 'darkblue';
 
 // keys codes: This keys move the snake in any direction
@@ -38,6 +38,8 @@ let snake = [
 let dx = 10;
 let dy = 0;
 
+flag = false;
+
 let change_direction = true;
 
 // Get the canvas element
@@ -51,13 +53,15 @@ console.log(snakeboard_ctx)
 function main() {
     if(hasCollision()) return;
     change_direction = false;
-    setTimeout(onTick,50) // this call funtion onTick each 1000 miliseconds
+    setTimeout(onTick,50,flag) // this call funtion onTick each 1000 miliseconds
 }
 
-function onTick() {
+function onTick(stop) {
         clearCanvas();
         drawFood();
-        moveSnake();
+        if(!stop){
+            moveSnake();
+        }
         drawSnake();
         main(); 
 }
@@ -114,7 +118,7 @@ function clearCanvas() {
 }
 
 function drawFood() {
-    snakeboard_ctx.fillStyle = 'blue';
+    snakeboard_ctx.fillStyle = '#950e0e';
     snakeboard_ctx.strokestyle = 'darkgreen';
     snakeboard_ctx.fillRect(food_x, food_y, 10, 10);
     snakeboard_ctx.strokeRect(food_x, food_y, 10, 10);
@@ -189,9 +193,18 @@ function has_snake_eaten_food(part) {
     if (has_eaten) gen_food();
 }
 
+function resetGame(){
+    if(flag){
+        flag = !flag;
+    }else{
+        flag = !flag;
+    }
+}
 
 gen_food();
 main();
 // Enlazar boton
 
 document.addEventListener("keydown", changeDirection);
+
+document.getElementById('play').addEventListener('click',resetGame)
