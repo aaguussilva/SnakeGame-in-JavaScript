@@ -1,0 +1,5 @@
+Siguiente paso, hacer los botones, para que sirve cada uno, que hacer, TODO
+
+Lo del zoom que los botones se separan tambien estaria bueno solucionarlo.
+
+Pensar en agregar cosas al juego, o modos de juego.
