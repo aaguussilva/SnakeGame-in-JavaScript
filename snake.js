@@ -38,7 +38,7 @@ let snake = [
 let dx = 10;
 let dy = 0;
 
-flag = false;
+let flag = false; // if this flag is true, the game gonna pause
 
 let change_direction = true;
 
@@ -53,7 +53,7 @@ console.log(snakeboard_ctx)
 function main() {
     if(hasCollision()) return;
     change_direction = false;
-    setTimeout(onTick,50,flag) // this call funtion onTick each 1000 miliseconds
+    let timerID = setTimeout(onTick,50,flag) // this call funtion onTick each 1000 miliseconds
 }
 
 function onTick(stop) {
@@ -193,7 +193,7 @@ function has_snake_eaten_food(part) {
     if (has_eaten) gen_food();
 }
 
-function resetGame(){
+function pauseGame(){
     if(flag){
         flag = !flag;
     }else{
@@ -201,10 +201,34 @@ function resetGame(){
     }
 }
 
+function resetGame(){
+    if(!flag){
+        flag = !flag;
+    }
+    snake = [
+        {x: 200, y: 200},
+        {x: 190, y: 200},
+        {x: 180, y: 200},
+        {x: 170, y: 200},
+        {x: 160, y: 200}
+    ]
+    score = 0;
+    dx = 10;
+    dy = 0;
+    flag = false;
+    change_direction = true;
+    clearInterval(timerID);
+    main();
+    gen_food();
+}
+
 gen_food();
 main();
+
 // Enlazar boton
 
 document.addEventListener("keydown", changeDirection);
 
-document.getElementById('play').addEventListener('click',resetGame)
+document.getElementById('pause').addEventListener('click',pauseGame);
+
+document.getElementById('reset').addEventListener('click',resetGame);

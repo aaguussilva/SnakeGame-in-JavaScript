@@ -32,6 +32,8 @@
 }
 
 .button{
+  height: 3em;
+  width: 6em;
   margin-left: 2em;
   background-color: #ffcc00;
 }
