@@ -21,6 +21,9 @@ const DOWN_KEY_S = 83;
 // score of the game, starting in 0
 let score = 0;
 
+// set best score
+let best_score = 0;
+
 //variable x,y used in generation of food
 let food_x;
 let food_y;
@@ -208,6 +211,8 @@ function resetGame(){
     if(!flag){
         flag = !flag;
     }
+
+    // reset snake obj
     snake = [
         {x: 200, y: 200},
         {x: 190, y: 200},
@@ -215,7 +220,17 @@ function resetGame(){
         {x: 170, y: 200},
         {x: 160, y: 200}
     ]
+
+    if (score > best_score){
+        best_score = score;
+        document.getElementById('best__score').innerHTML = score;
+    }
+
+    // reset score to 0
     score = 0;
+
+    document.getElementById('score').innerHTML = score; 
+
     dx = 10;
     dy = 0;
     flag = false;
