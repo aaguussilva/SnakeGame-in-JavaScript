@@ -39,7 +39,6 @@ let dx = 10;
 let dy = 0;
 
 let flag = false; // if this flag is true, the game gonna pause
-
 let change_direction = true;
 
 // Get the canvas element
@@ -48,12 +47,16 @@ const snakeboard = document.getElementById("snakeboard");
 const snakeboard_ctx = snakeboard.getContext("2d");
 console.log(snakeboard_ctx)
 // Start game
-
+let timerID
 // main function called repeatedly to keep the game running
 function main() {
-    if(hasCollision()) return;
+    if(hasCollision()){
+        clearInterval(timerID);
+        flag = true;
+        return
+    };
     change_direction = false;
-    let timerID = setTimeout(onTick,50,flag) // this call funtion onTick each 1000 miliseconds
+    timerID = setTimeout(onTick,50,flag) // this call funtion onTick each 1000 miliseconds
 }
 
 function onTick(stop) {
